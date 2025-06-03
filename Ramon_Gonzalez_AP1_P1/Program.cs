@@ -1,10 +1,16 @@
+using Blazored.Toast;
 using Ramon_Gonzalez_AP1_P1.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("SqlConStr");
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddBlazoredToast();
+
 
 var app = builder.Build();
 
