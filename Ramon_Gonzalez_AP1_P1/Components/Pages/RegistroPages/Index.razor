@@ -53,7 +53,8 @@
                     <InputDate class="form-control" @bind-Value="FechaFin" />
                 </div>
             </div>
-            <tbody>
+
+            @* Tabla *@
                 <table class="table table-hover">
                     <thead class="table table-striped text-bg-danger-black">
                         <tr>
@@ -64,37 +65,33 @@
                             <th>Editar</th>
                         </tr>
                     </thead>
-
+                    <tbody>
+                        @foreach (var ap in ListaAportes)
+                        {
+                            <tr>
+                                <td>@ap.AportesId</td>
+                                <td>@ap.Persona</td>
+                                <td>@ap.Monto.ToString("C")</td>
+                                <td>@ap.Fecha.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <a href="/Aportes/Edit/@ap.AportesId" class="btn btn-outline-primary bi bi-pencil-square"></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
                 </table>
-            </tbody>
-           
-             
 
-
-
-
-
-
-
-            @* Tabla *@
-            <table class="table table-hover">
-                <thead class="table table-striped text-black">
-                    <tr>
-                        <th>Id</th>
-                    </tr>
-                </thead>
-            </table>
-
-            <div class="row mt-4">
                 <div class="col-auto">
-                    <label class="fw-bold">Conteo</label>
-                    <input type="text" class="form-control" value="2" readonly />
+                    <label class="fw-bold">Conteo:</label>
+                    <input type="text" class="form-control" value="@ListarAportes.Count" readonly />
                 </div>
+                
                 <div class="col-auto ms-auto text-end">
-                    <label class="fw-bold">Total</label>
-                    <input type="text" class="form-control text-end" value="1,500.00" readonly />
+                    <label class="fw-bold">Total:</label>
+                    <input type="text" class="form-control text-end"
+                       value="@ListaAportes.Sum(a => a.Monto).ToString("C")" readonly />
+
                 </div>
-            </div>
 
         </div>
     </div>
