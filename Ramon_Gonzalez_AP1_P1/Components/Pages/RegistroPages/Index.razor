@@ -1,62 +1,80 @@
 ﻿@page "/Registro/Index"
 @using Ramon_Gonzalez_AP1_P1.Models
+@using Ramon_Gonzalez_AP1_P1.Service
+@inject AportesService AportesService
+@rendermode InteractiveServer
 
 
-<PageTitle>Consulta de .....</PageTitle>
+<PageTitle>Consulta de Aportes</PageTitle>
 
 <div class="container">
     <div class="card shadow-lg">
         <div class="card-header text-center">
-            <h3 class="card-title fw-bold">Consulta de .....</h3>
+            <h3 class="card-title fw-bold">Consulta de Aportes</h3>
         </div>
 
         <div class="card-body">
 
             @* Filtros *@
             <div class="row mb-2">
-                <div class="col-3">
-                    <label class="col-form-label"><strong>Filtrar por</strong></label>
-                </div>
-                <div class="col-4">
-                    <label class="col-form-label"><strong>Búsqueda</strong></label>
-                </div>
-                <div class="col-2">
-                    <label class="col-form-label"><strong>Desde</strong></label>
-                </div>
-                <div class="col-2">
-                    <label class="col-form-label"><strong>Hasta</strong></label>
-                </div>
+                <div class="col-3"><strong>Filtrar por</strong></div>
+                <div class="col-4"><strong>Busqueda</strong></div>
+                <div class="col-2"><strong>Desde</strong></div>
+                <div class="col-2"><strong>Hasta</strong></div>
             </div>
 
             <div class="row align-items-center mb-3">
                 <div class="col-3">
                     <InputSelect class="form-select" @bind-Value="Filtro">
                         <option value="" disabled selected>Elija una opción</option>
-                        <option value="Id">Id</option>
+                        <option value="AportesId">Id</option>
+                        <option value="Persona">Persona</option>
+                        <option value="Monto">Monto</option>
+                        <option value="Fecha">Fecha</option>
+
                     </InputSelect>
                 </div>
 
                 <div class="col-4">
                     <div class="input-group">
                         <input class="form-control" @bind="ValorFiltro" placeholder="Buscar" />
-                        <button type="button" class="btn btn-outline-primary bi bi-search"="Buscar"></button>
+                        <button class="btn btn-outline-primary bi bi-search" @onclick="Buscar"></button>
+                        <button class="btn btn-outline-secondary ms-1 bi bi-arrow-repeat" @onclick="Restablecer"
+                                title="Restablecer"></button>
                     </div>
                 </div>
 
-                <div class="col-2">
-                    <InputDate @bind-Value="FechaInicio" class="form-control" />
-                </div>
+            </div>
+            
+            <div class="col-2">
+                <InputDate class="from-control" @bind-value="FechaInicio"/>
 
                 <div class="col-2">
-                    <InputDate @bind-Value="FechaFin" class="form-control" />
+                    <InputDate class="form-control" @bind-Value="FechaFin" />
                 </div>
             </div>
+            <tbody>
+                <table class="table table-hover">
+                    <thead class="table table-striped text-bg-danger-black">
+                        <tr>
+                            <th>Aportes Id</th>
+                            <th>Persona</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
 
-            <div class="col text-end mt-2">
-                <a href="/Ticket/Create" class="btn btn-success">
-                    <i class="bi bi-plus-square"></i> Crear
-                </a>
-            </div>
+                </table>
+            </tbody>
+           
+             
+
+
+
+
+
+
 
             @* Tabla *@
             <table class="table table-hover">
@@ -85,10 +103,11 @@
 
 
 @code {
-    public List<Registro> Registro { get; set; } = new();
+    public List<Aportes> Aportes { get; set; } = new();
     public string Filtro { get; set; } = string.Empty;
     public string ValorFiltro { get; set; } = string.Empty;
     public DateOnly? FechaInicio { get; set; }
     public DateOnly? FechaFin { get; set; }
 
 }
+ 
