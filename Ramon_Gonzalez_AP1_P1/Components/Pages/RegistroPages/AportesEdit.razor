@@ -10,22 +10,26 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-
-    <div class="container">
+        <div class="container">
         <div class="card shadow-lg mt-4">
             <div class="card-header text-center">
                 <h5 class="card-title fw-bold">Editar Aporte</h5>
             </div>
 
+            <div class="card-body">
+
+                @* Persona *@
+                <div class="mb-3">
+                    <label class="form-label"><strong>Persona</strong></label>
+                    <InputText class="form-control" @bind-Value="aporte.Persona" />
+                    <ValidationMessage For="() => aporte.Persona" />
+                </div>
 
 
 
-
-
-
-
-
- </div>
+    
+     
+        </div>
     </div>
 </EditForm>
 

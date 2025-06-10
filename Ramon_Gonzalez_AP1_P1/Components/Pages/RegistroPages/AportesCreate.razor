@@ -1,0 +1,88 @@
+﻿﻿@page "/Aportes/Create"
+@using Ramon_Gonzalez_AP1_P1.Models
+@inject AportesService aportesService
+@using Ramon_Gonzalez_AP1_P1.Service
+@inject NavigationManager navigationManager
+@rendermode InteractiveServer
+@inject Blazored.Toast.Services.IToastService toastService
+
+
+@*HTML*@
+<PageTitle>Registro de Aportes</PageTitle>
+
+<EditForm Model="aporte" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />   
+
+    <div class="container">
+        <div class="card shadow-lg mt-4">
+            <div class="card-header text-center">
+                <h5 class="card-title fw-bold">Registro de Aportes</h5>
+            </div>
+
+            <div class="card-body">
+
+                @* Persona *@
+                <div class="mb-3">
+                    <label class="form-label"><strong>Persona</strong></label>
+                    <InputText class="form-control" @bind-Value="aporte.Persona" />
+                    <ValidationMessage For="() => aporte.Persona" />
+                </div>
+
+                @* Monto *@
+                <div class="mb-3">
+                    <label class="form-label"><strong>Monto</strong></label>
+                    <InputNumber class="form-control" @bind-Value="aporte.Monto" />
+                    <ValidationMessage For="() => aporte.Monto" />
+                </div>
+
+            </div>
+
+            @* Footer *@
+            <div class="card-footer text-center mt-2">
+                <button type="button" class="btn btn-outline-danger me-2" @onclick="Volver">
+                    <i class="bi bi-arrow-left-circle"></i> Volver
+                </button>
+                <button type="submit" class="btn btn-outline-success me-2">
+                    <i class="bi bi-save"></i> Guardar
+                </button>
+                <button type="reset" class="btn btn-outline-primary" @onclick="Limpiar">
+                    <i class="bi bi-plus"></i> Limpiar
+                </button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+
+@code {
+
+    private Aportes aporte = new();
+
+    private async Task Guardar()
+    {
+        var resultado = await aportesService.Guardar(aporte);
+
+        if (resultado)
+        {
+            toastService.ShowSuccess("Aporte registrado correctamente");
+        }
+        else
+        {
+            toastService.ShowError("No se pudo registrar el aporte");
+        }
+
+        navigationManager.NavigateTo("/Aportes/Index");
+    }
+
+    private void Volver()
+    {
+        navigationManager.NavigateTo("/Aportes/Index");
+    }
+
+    private void Limpiar()
+    {
+        aporte = new Aportes();
+    }
+
+}
