@@ -93,7 +93,14 @@
     private bool mostrarModal = false;
 
 
-
+    protected override async Task OnInitializedAsync()
+    {
+        var resultado = await aportesService.Buscar(id);
+        if (resultado != null)
+            aporte = resultado;
+        else
+            navigationManager.NavigateTo("/Aportes/Index");
+    }
 
 
 
