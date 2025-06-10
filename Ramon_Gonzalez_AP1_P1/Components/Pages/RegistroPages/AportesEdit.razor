@@ -1,8 +1,10 @@
-﻿﻿@page "/Aportes/Edit/{id:int}"
+﻿@page "/Aportes/Edit/{id:int}"
 @using Ramon_Gonzalez_AP1_P1.Models
 @using Ramon_Gonzalez_AP1_P1.Service
 @inject AportesService aportesService
 @inject NavigationManager navigationManager
+@rendermode InteractiveServer
+@inject Blazored.Toast.Services.IToastService toastService
 
 <PageTitle>Editar Aporte</PageTitle>
 
@@ -100,7 +102,47 @@
         else
             navigationManager.NavigateTo("/Aportes/Index");
     }
+    private async Task Guardar()
+    {
+        var guardado = await aportesService.Guardar(aporte);
+        if (guardado)
+        {
+            toastService.ShowSuccess("Aporte guardado exitosamente");
+        }
+        else
+        {
+            toastService.ShowError("Error al guardar el aporte");
+        }
 
+        navigationManager.NavigateTo("/Aportes/Index");
+    }
+
+    private async Task Eliminar()
+    {
+        var eliminado = await aportesService.EliminarPorId(aporte.AportesId);
+        mostrarModal = false;
+
+        if (eliminado)
+        {
+            toastService.ShowSuccess("Aporte eliminado correctamente");
+        }
+        else
+        {
+            toastService.ShowError("No se pudo eliminar el aporte");
+        }
+
+        navigationManager.NavigateTo("/Aportes/Index");
+    }
+
+    private void Volver()
+    {
+        navigationManager.NavigateTo("/Aportes/Index");
+    }
+
+    private void CerrarModal()
+    {
+        mostrarModal = false;
+    }
 
 
 }
