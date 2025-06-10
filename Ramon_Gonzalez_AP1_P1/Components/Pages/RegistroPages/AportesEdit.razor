@@ -1,0 +1,35 @@
+﻿﻿@page "/Aportes/Edit/{id:int}"
+@using Ramon_Gonzalez_AP1_P1.Models
+@using Ramon_Gonzalez_AP1_P1.Service
+@inject AportesService aportesService
+@inject NavigationManager navigationManager
+
+<PageTitle>Editar Aporte</PageTitle>
+
+<EditForm Model="aporte" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+
+    <div class="container">
+        <div class="card shadow-lg mt-4">
+            <div class="card-header text-center">
+                <h5 class="card-title fw-bold">Editar Aporte</h5>
+            </div>
+
+
+
+
+
+
+
+
+
+ </div>
+    </div>
+</EditForm>
+
+
+@code {
+
+}
