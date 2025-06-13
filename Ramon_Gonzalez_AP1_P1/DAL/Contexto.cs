@@ -8,7 +8,6 @@ namespace Ramon_Gonzalez_AP1_P1.DAL
         public Contexto(DbContextOptions<Contexto> options) : base(options) 
         {
         }
-
         public DbSet<Aportes> Aportes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
