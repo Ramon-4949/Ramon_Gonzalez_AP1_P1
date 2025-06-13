@@ -52,7 +52,6 @@
     </div>
 </EditForm>
 
-
 @if (mostrarModal)
 {
     <div class="modal fade show d-block" style="background-color: rgba(0,0,0,0.5);" tabindex="-1">
@@ -84,8 +83,6 @@
         </div>
     </div>
 }
-
-
 @code {
     [Parameter]
     public int id { get; set; }
@@ -143,6 +140,4 @@
     {
         mostrarModal = false;
     }
-
-
 }

@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Ramon_Gonzalez_AP1_P1.DAL;
+
 
 namespace Ramon_Gonzalez_AP1_P1.DAL
 {
